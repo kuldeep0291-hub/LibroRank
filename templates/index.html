@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibroRank</title>
+</head>
+<body>
+    <h1>LibroRank</h1>
+    <form method="POST">
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic" required>
+
+        <label for="source">Source:</label>
+        <select id="source" name="source">
+            <option value="OpenLibrary">OpenLibrary</option>
+            <option value="GoogleBooks">GoogleBooks</option>
+        </select>
+
+        <label for="user_type">User Type:</label>
+        <select id="user_type" name="user_type">
+            <option value="Beginner">Beginner</option>
+            <option value="Student">Student</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if rankings %}
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Title</th>
+                <th>Popularity</th>
+                <th>Correctness</th>
+                <th>Relevance</th>
+                <th>Score</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in rankings %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.popularity }}</td>
+                <td>{{ book.correctness }}</td>
+                <td>{{ book.relevance }}</td>
+                <td>{{ book.score }}</td>
+                <td><a href="{{ book.link }}" target="_blank" rel="noopener noreferrer">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>
